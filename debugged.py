@@ -49,8 +49,8 @@ def main():
     
     # (prediction)
     st.info("Recommendation")
-    st.write("['Closed with monetary relief!']")   
-    
+    #st.write("['Closed with monetary relief!']")   
+    st.write(prediction) 
 
 if __name__ == '__main__':
     main()
