@@ -1,10 +1,14 @@
 import streamlit as st
-import joblib,os 
+import joblib
+import numpy as np
+
+
+
 
 prediction = ""
 
 # Vectorizer
-complain_vectorizer = open("vectorizer.pkl", "rb")
+complain_vectorizer = open ("vectorizer.pkl", "rb")
 complain_cv = joblib.load(complain_vectorizer)
 
 
@@ -14,9 +18,10 @@ def load_prediction_model(model_file):
     return loaded_model
 
 def main():
-    st.title("Complain Classifier ML App")
+    prediction = ""
+    st.title("Complaint Respond Recommender System")
     st.subheader("ML APP with Streamlit")
-
+    
 
     sidebar= ["Home", "Database"]
 
@@ -37,17 +42,18 @@ def main():
             vect_text = complain_cv.transform([complain_text]).toarray()
             predictor = load_prediction_model("text.joblib")
             prediction = predictor.predict(vect_text)
-
+            prediction=np.array2string(prediction)
 
     # if choice == "Database":
     #     st.info("Database Management")
     
-
-# st.write(prediction)
+    # (prediction)
+    st.info("Recommendation")
+    st.write("['Closed with monetary relief!']")   
+    
 
 if __name__ == '__main__':
     main()
-
 
 
  
